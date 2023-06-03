@@ -1,6 +1,7 @@
-#non-parametric permutation testing
-#anova model with pairwise comparisons
+#non-parametric permutation ANCOVA (aovp)
+#use Tukey or another method for post-hoc comparisons
 
+#import packages
 library(lmPerm)
 library(multcomp)
 
