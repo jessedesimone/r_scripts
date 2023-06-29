@@ -13,4 +13,5 @@ mod<- aovp(<response var> ~ <grouping var> + <cov1> + <cov2> + <cov3> , data = d
 summary(mod, type= "III")
 
 #tukey post hoc
-TukeyHSD(mod, "<grouping variable>",  conf.level=.95)
+postHocs <- glht(mod, linfct = mcp(<grouping var> = "Tukey")); summary(postHocs)
+
