@@ -6,7 +6,7 @@ library("readxl")
 library("cutpointr")
 
 #input data
-data<-read_excel("/path/to/infile.xlsx")
+data<-read.csv("/path/to/infile.csv")
 head(data)
 
 #determine cutpoint
