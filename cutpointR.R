@@ -31,3 +31,5 @@ plot_metric(opt_cut)
 #calculate bootstrap confidence interval
 boot_ci(opt_cut, optimal_cutpoint, in_bag = FALSE, alpha = 0.05)        #cutpoint
 boot_ci(opt_cut, AUC, in_bag = TRUE, alpha = 0.05)      #AUC
+boot_ci(opt_cut, sensitivity, in_bag = TRUE, alpha = 0.05) 
+boot_ci(opt_cut, specificity, in_bag = TRUE, alpha = 0.05) 
