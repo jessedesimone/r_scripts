@@ -51,8 +51,8 @@ is.factor(df$age)
 #this option will output summary word and excel documents
 #example below for 96 different regions starting at column 6 (columns 1-5 of dataframe are predictor variables)
 
-6:ncol(df)         #check number of columns/tests to run, n specified first column of variables to be tested 
-pvals<-rep(NA,96)  #create empty table with pvals for number of tests to be run
+6:ncol(df)         #check number of columns/tests to run, n specifies first column of variables to be tested; convariate factors should be placed before the first variable 
+pvals<-rep(NA,96)  #create empty table with pvals for number of tests to be run; should match number of variables
 sink ('aovp_output.doc')        #specify output doc file
 #create empty lists
 variable_list=list()
