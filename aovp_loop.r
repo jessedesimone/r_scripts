@@ -144,6 +144,7 @@ for (i in 6:ncol(df)){
     #note this is only performing tukey contrasts for the last model run
     #Tukey less likely to have major changes from model to model
     tk<-summary(glht(mod, linfct = mcp(grp_id = "Tukey")))
+    print(tk)
     sum_test = unlist(summary(tk))
     p1<-sum_test$test.pvalues1
     p2<-sum_test$test.pvalues2
