@@ -133,8 +133,8 @@ for (i in 6:ncol(df)){
         print(summary(mod, type="III"))
         p_tmp<-summary(mod, type="III")[[1]][1,5]       #extract main group effect from aovp summary
         aovp_tmp<-append(aovp_tmp, p_tmp)       #append temp pvals to list
-        e_tmp<-summary(mod, type="III")[[1]][5,5]        #etract education covariate effect from aovp summary
-        eaovp_tmp<-append(eaovp_tmp, e_tmp)       #append temp pvals to list
+        # e_tmp<-summary(mod, type="III")[[1]][5,5]        #etract education covariate effect from aovp summary
+        # eaovp_tmp<-append(eaovp_tmp, e_tmp)       #append temp pvals to list
         t<-t+1      #update counter
         if (t==10){
             break
@@ -176,4 +176,4 @@ print(df_final)
 
 #export dataframe
 df_final<-apply(df_final,2,as.character)
-write.csv(df_final, file='aovp_output.csv', row.names=FALSE)
+write.csv(df_final, file=paste0('aovp_output_',filetag,'.csv'), row.names=FALSE)
