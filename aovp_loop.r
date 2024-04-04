@@ -8,10 +8,15 @@ library(multcomp)
 
 #set working directory
 setwd('<path/to/working/directory/>')
+filetag='fw'
 
+#set random seed
 set.seed(42)
+
 #read data
-df<-read.csv('aovp_input.csv')
+df<-read.csv(paste0('aovp_input_',filetag,'.csv'))
+
+#set factors
 df$grp_id<-as.factor(df$grp_id)
 df$sex<-as.factor(df$sex)
 df$apoe<-as.factor(df$apoe)
@@ -107,6 +112,8 @@ pvals<-rep(NA,96)  #create empty table with pvals for number of tests to be run
 #create empty lists
 variable_list=list()
 aovp_list=list()
+#educ_list=()
+#create Tukey lists for contrasts - this is assuming 3 contrasts - update as needed
 tukey_list_p1=list()
 tukey_list_p2=list()
 tukey_list_p3=list()
@@ -124,8 +131,10 @@ for (i in 6:ncol(df)){
     repeat {
         mod<-aovp(df[,i] ~ grp_id + age + sex + apoe + educ , data = df, perm="Exact", seqs=FALSE,center=TRUE, projections = FALSE)
         print(summary(mod, type="III"))
-        p_tmp<-summary(mod, type="III")[[1]][1,5]       #extract main effect from aovp summary
+        p_tmp<-summary(mod, type="III")[[1]][1,5]       #extract main group effect from aovp summary
         aovp_tmp<-append(aovp_tmp, p_tmp)       #append temp pvals to list
+        e_tmp<-summary(mod, type="III")[[1]][5,5]        #etract education covariate effect from aovp summary
+        eaovp_tmp<-append(eaovp_tmp, e_tmp)       #append temp pvals to list
         t<-t+1      #update counter
         if (t==10){
             break
@@ -146,6 +155,7 @@ for (i in 6:ncol(df)){
     tk<-summary(glht(mod, linfct = mcp(grp_id = "Tukey")))
     print(tk)
     sum_test = unlist(summary(tk))
+    #should have p values and lists for each contrast
     p1<-sum_test$test.pvalues1
     p2<-sum_test$test.pvalues2
     p3<-sum_test$test.pvalues3
